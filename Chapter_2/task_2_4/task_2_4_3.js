@@ -1,9 +1,9 @@
 'use strict';
 
-function someCode(current_Date) {
-    let yearCurrentdate =  new Date().getFullYear();
-    let yearPastTime = current_Date.split('.')[2];
-    return yearCurrentdate - yearPastTime;
+function someCode(currentDate) {
+    let yearCurrentDate =  new Date().getFullYear();
+    let yearPastTime = currentDate.split('.')[2];
+    return yearCurrentDate - yearPastTime;
 }
 
 const BIRTHDAY = '18.04.1982';
