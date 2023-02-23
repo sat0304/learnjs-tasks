@@ -6,4 +6,4 @@ let name;
 name = "Джон";
 admin = name;
 alert(admin);
-// console.log(admin)
+// console.log(admin);
