@@ -1,17 +1,8 @@
 'use strict';
 
-function someCode(currentDate) {
-    let yearCurrentDate =  new Date().getFullYear();
-    let yearPastTime = currentDate.split('.')[2];
-    return yearCurrentDate - yearPastTime;
-}
-
-const BIRTHDAY = '18.04.1982';
-const age = someCode(BIRTHDAY);
+let name = "Ilya";
 
 
-// console.log(BIRTHDAY);
-// console.log(age);
-
-alert(BIRTHDAY);
-alert(age);
+alert( `hello ${1}` ); 
+alert( `hello ${"name"}` ); 
+alert( `hello ${name}` );
