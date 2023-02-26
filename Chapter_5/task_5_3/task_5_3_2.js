@@ -1,23 +1,11 @@
 'use strict';
 
-function Calculator() {
+function checkSpam(str) {
+  let lowerStr = str.toLowerCase();
 
-  this.read = function() {
-    this.a = +prompt('a?', 0);
-    this.b = +prompt('b?', 0);
-  };
-
-  this.sum = function() {
-    return this.a + this.b;
-  };
-
-  this.mul = function() {
-    return this.a * this.b;
-  };
+  return lowerStr.includes('viagra') || lowerStr.includes('xxx');
 }
 
-let calculator = new Calculator();
-calculator.read();
-
-alert( "Sum=" + calculator.sum() );
-alert( "Mul=" + calculator.mul() );
+alert( checkSpam('buy ViAgRA now') );
+alert( checkSpam('free xxxxx') );
+alert( checkSpam("innocent rabbit") );

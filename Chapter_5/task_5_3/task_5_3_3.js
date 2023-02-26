@@ -1,16 +1,9 @@
 'use strict';
 
-function Accumulator(startingValue) {
-  this.value = startingValue;
+function truncate(str, maxlength) {
+  return (str.length > maxlength) ?
+    str.slice(0, maxlength - 1) + '…' : str;
+};
 
-  this.read = function() {
-    this.value += +prompt('Сколько нужно добавить?', 0);
-  };
-
-}
-
-let accumulator = new Accumulator(10000);
-accumulator.read();
-accumulator.read();
-accumulator.read();
-alert(accumulator.value);
+alert(truncate("Вот, что мне хотелось бы сказать на эту тему:", 20));
+alert(truncate("Всем привет!", 20));
