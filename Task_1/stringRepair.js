@@ -48,36 +48,6 @@ class Repair_string {
     return this.strToRepair;
   }
 
-
-  // dotComaFrame() {
-  //   let strLength = this.strToRepair.length;
-  //   let strTemp = '';
-  //   let spaces = ' ';
-  //   let dotSign = '.';
-  //   let comaSign = ',';
-  //   for (let i = 0; i < strLength ; i++){
-  //     if (this.strToRepair[i] == dotSign ||
-  //        this.strToRepair[i] == comaSign) {
-  //         strTemp += this.strToRepair[i] + spaces;
-  //         continue;
-  //     }
-  //     strTemp += this.strToRepair[i];
-  //   }
-  //   this.strToRepair = strTemp
-  //   return this.strToRepair;
-  // }
-  // get strToRepair() {
-  //   return this._strToRepair;
-  // }
-
-  // set strToRepair(value) {
-  //   if (value.length < 4) {
-  //     this._strToRepair = "Name is too short!";
-  //     return;
-  //   }
-  //   this._strToRepair = value;
-  // }
-
 }
 
 // console.log(stringRepair.spaceExtractor());
