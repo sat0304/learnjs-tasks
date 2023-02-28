@@ -2,12 +2,19 @@
 
 const STR = 'The quick, brown .fox ,jumps over.the lazy ,dog.';
 const NAMEOFSOMETHING = 'bAlAnErTop';
-const RUSTR = 'Вот пример строки,в которой     используются знаки препинания.После знаков должны стоять пробелы , а перед знаками их быть не должно . ';
+const RUSTRSPASES = 'Вот пример строки,в которой     используются знаки препинания.После знаков должны стоять пробелы , а перед знаками их быть не должно . ';
+const RUSTRUNIQUE = 'Текст, в котором слово текст несколько раз встречается и слово тоже';
+
+// let originWords = {};
 
 class Repair_string {
 
   constructor(strToRepair) {
     this.strToRepair = strToRepair;
+    this.spaces = ' ';
+    this.dotSign = '.';
+    this.comaSign = ',';
+    this.originWords = {};
   }
 
   titleString(){
@@ -20,61 +27,86 @@ class Repair_string {
   spaceTrimmer(){
     let originalStrLength = this.strToRepair.length;
     let strForExtraSpaces = '';
-    let spaces = ' ';
-    let dotSign = '.';
-    let comaSign = ',';
+
 
     for (let i = 0; i < originalStrLength; i++){
-      if (this.strToRepair[i] == dotSign ||
-         this.strToRepair[i] == comaSign) {
-          strForExtraSpaces += this.strToRepair[i] + spaces;
+      if (this.strToRepair[i] == this.dotSign ||
+         this.strToRepair[i] == this.comaSign) {
+          strForExtraSpaces += this.strToRepair[i] + this.spaces;
           continue;
       }
       strForExtraSpaces += this.strToRepair[i];
     }
 
     let strForDeletedSpaces = '';
-    let spacedStrLength = strForExtraSpaces.length
+    let spacedStrLength = strForExtraSpaces.length;
 
     for (let i = 0; i < spacedStrLength ; i++){
-      if (strForExtraSpaces[i] == spaces &&
-         (strForExtraSpaces[i+1] == comaSign ||
-          strForExtraSpaces[i+1] == dotSign ||
-          strForExtraSpaces[i+1] == spaces)) {
+      if (strForExtraSpaces[i] == this.spaces &&
+         (strForExtraSpaces[i+1] == this.comaSign ||
+          strForExtraSpaces[i+1] == this.dotSign ||
+          strForExtraSpaces[i+1] == this.spaces)) {
           continue;
       }
       strForDeletedSpaces += strForExtraSpaces[i];
     }
-    this.strToRepair = strForDeletedSpaces.slice(0,-1)
+    this.strToRepair = strForDeletedSpaces.slice(0,-1);
     return this.strToRepair;
   }
 
   wordCounterInString(){
     let counterWords = 0;
     let originalStrLength = this.strToRepair.length;
-    let spaces = ' ';
 
-    if (this.strToRepair.length != spaces) counterWords = 1;
+
+    if (this.strToRepair.length != this.spaces) counterWords = 1;
 
     for (let i = 0; i < originalStrLength; i++){
-      if (this.strToRepair[i] == spaces) counterWords += 1;
+      if (this.strToRepair[i] == this.spaces) counterWords += 1;
       }
-    // console.log(this.strToRepair[originalStrLength-1])
     return counterWords;
     }
 
+  originWordCounting(){
+    let originalStrLength = this.strToRepair.length;
+    let strForOriginals = '';
+
+    for (let i = 0; i < originalStrLength ; i++){
+      if (this.strToRepair[i] == this.comaSign ||
+          this.strToRepair[i] == this.dotSign) {
+          continue;
+          }
+      strForOriginals  += this.strToRepair[i].toLowerCase();
+      }
     
-    
+    const words = strForOriginals.split(' ');
+    for (let i = 0; i < words.length ; i++){
+      if (!(words[i] in this.originWords)) {
+        this.originWords[words[i]] = 1;
+      } else {
+        this.originWords[words[i]] += 1;
+      }
+    }
+    return this.originWords;
+    }
 }
 
 let strNew = new Repair_string(NAMEOFSOMETHING);
-console.log(strNew.titleString())
-console.log(strNew.wordCounterInString())
+alert(NAMEOFSOMETHING);
+alert(strNew.titleString());
+alert('String length is ' + strNew.wordCounterInString());
 
-strNew = new Repair_string(STR)
-console.log(strNew.spaceTrimmer())
-console.log(strNew.wordCounterInString())
+strNew = new Repair_string(STR);
+alert(STR)
+alert(strNew.spaceTrimmer());
+alert('String length is ' + strNew.wordCounterInString());
 
-strNew = new Repair_string(RUSTR)
-console.log(strNew.spaceTrimmer())
-console.log(strNew.wordCounterInString())
+strNew = new Repair_string(RUSTRSPASES);
+alert(RUSTRSPASES);
+alert(strNew.spaceTrimmer());
+alert('String length is ' + strNew.wordCounterInString());
+
+strNew = new Repair_string(RUSTRUNIQUE);
+alert(RUSTRUNIQUE);
+alert('String length is ' + strNew.wordCounterInString());
+alert(JSON.stringify(strNew.originWordCounting(), null, 4));
