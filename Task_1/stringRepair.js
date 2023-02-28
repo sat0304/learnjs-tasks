@@ -1,7 +1,8 @@
 'use strict';
 
 const STR = 'The quick, brown .fox ,jumps over.the lazy ,dog.';
-const NAMEOFSOMETHING = 'bAlAnErTop'
+const NAMEOFSOMETHING = 'bAlAnErTop';
+const RUSTR = 'Вот пример строки,в которой     используются знаки препинания.После знаков должны стоять пробелы , а перед знаками их быть не должно . ';
 
 class Repair_string {
 
@@ -66,12 +67,14 @@ class Repair_string {
     
 }
 
-// console.log(stringRepair.spaceExtractor());
 let strNew = new Repair_string(NAMEOFSOMETHING);
-// console.log(strNew.strToRepair)
 console.log(strNew.titleString())
 console.log(strNew.wordCounterInString())
+
 strNew = new Repair_string(STR)
-// console.log(strNew.dotComaFrame())
+console.log(strNew.spaceTrimmer())
+console.log(strNew.wordCounterInString())
+
+strNew = new Repair_string(RUSTR)
 console.log(strNew.spaceTrimmer())
 console.log(strNew.wordCounterInString())
