@@ -33,9 +33,9 @@ class Repair_string {
     }
 
     let strForDeletedSpaces = '';
-    let SpacedStrLength = strForExtraSpaces.length
+    let spacedStrLength = strForExtraSpaces.length
 
-    for (let i = 0; i < SpacedStrLength ; i++){
+    for (let i = 0; i < spacedStrLength ; i++){
       if (strForExtraSpaces[i] == spaces &&
          (strForExtraSpaces[i+1] == comaSign ||
           strForExtraSpaces[i+1] == dotSign ||
