@@ -16,44 +16,47 @@ class Repair_string {
     return this.strToRepair;
   }
 
-  spaceExtractor(){
-    let strLength = this.strToRepair.length;
-    let strTemp = '';
+  spaceTrimmer(){
+    let originalStrLength = this.strToRepair.length;
+    let strTempForDot = '';
     let spaces = ' ';
-    let pointSign = '.';
+    let dotSign = '.';
     let comaSign = ',';
-    for (let i = 0; i < strLength ; i++){
-      if (this.strToRepair[i] == pointSign ||
+
+    for (let i = 0; i < originalStrLength; i++){
+      if (this.strToRepair[i] == dotSign ||
          this.strToRepair[i] == comaSign) {
-          strTemp += this.strToRepair[i] + spaces;
+          strTempForDot += this.strToRepair[i] + spaces;
           continue;
       }
-      strTemp += this.strToRepair[i];
+      strTempForDot += this.strToRepair[i];
     }
-    let strTemp2 = '';
-    for (let i = 0; i < strLength ; i++){
-      if (strTemp[i] == spaces &&
-         (strTemp[i+1] == comaSign ||
-          strTemp[i+1] == pointSign ||
-          strTemp[i+1] == spaces)) {
-          // strTemp += this.strToRepair[i] + spaces;
+
+    let strTempForSpace = '';
+    let SpacedStrLength = strTempForDot.length
+
+    for (let i = 0; i < SpacedStrLength ; i++){
+      if (strTempForDot[i] == spaces &&
+         (strTempForDot[i+1] == comaSign ||
+          strTempForDot[i+1] == dotSign ||
+          strTempForDot[i+1] == spaces)) {
           continue;
       }
-      strTemp2 += strTemp[i];
+      strTempForSpace += strTempForDot[i];
     }
-    this.strToRepair = strTemp2
+    this.strToRepair = strTempForSpace
     return this.strToRepair;
   }
 
 
-  // pointComaFrame() {
+  // dotComaFrame() {
   //   let strLength = this.strToRepair.length;
   //   let strTemp = '';
   //   let spaces = ' ';
-  //   let pointSign = '.';
+  //   let dotSign = '.';
   //   let comaSign = ',';
   //   for (let i = 0; i < strLength ; i++){
-  //     if (this.strToRepair[i] == pointSign ||
+  //     if (this.strToRepair[i] == dotSign ||
   //        this.strToRepair[i] == comaSign) {
   //         strTemp += this.strToRepair[i] + spaces;
   //         continue;
@@ -82,5 +85,5 @@ let strNew = new Repair_string(NAMEOFSOMETHING);
 // console.log(strNew.strToRepair)
 console.log(strNew.titleString())
 strNew = new Repair_string(STR)
-// console.log(strNew.pointComaFrame())
-console.log(strNew.spaceExtractor())
+// console.log(strNew.dotComaFrame())
+console.log(strNew.spaceTrimmer())
