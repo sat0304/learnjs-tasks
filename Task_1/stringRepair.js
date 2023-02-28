@@ -18,7 +18,7 @@ class Repair_string {
 
   spaceTrimmer(){
     let originalStrLength = this.strToRepair.length;
-    let strTempForDot = '';
+    let strForExtraSpaces = '';
     let spaces = ' ';
     let dotSign = '.';
     let comaSign = ',';
@@ -26,25 +26,25 @@ class Repair_string {
     for (let i = 0; i < originalStrLength; i++){
       if (this.strToRepair[i] == dotSign ||
          this.strToRepair[i] == comaSign) {
-          strTempForDot += this.strToRepair[i] + spaces;
+          strForExtraSpaces += this.strToRepair[i] + spaces;
           continue;
       }
-      strTempForDot += this.strToRepair[i];
+      strForExtraSpaces += this.strToRepair[i];
     }
 
-    let strTempForSpace = '';
-    let SpacedStrLength = strTempForDot.length
+    let strForDotComa = '';
+    let SpacedStrLength = strForExtraSpaces.length
 
     for (let i = 0; i < SpacedStrLength ; i++){
-      if (strTempForDot[i] == spaces &&
-         (strTempForDot[i+1] == comaSign ||
-          strTempForDot[i+1] == dotSign ||
-          strTempForDot[i+1] == spaces)) {
+      if (strForExtraSpaces[i] == spaces &&
+         (strForExtraSpaces[i+1] == comaSign ||
+          strForExtraSpaces[i+1] == dotSign ||
+          strForExtraSpaces[i+1] == spaces)) {
           continue;
       }
-      strTempForSpace += strTempForDot[i];
+      strForDotComa += strForExtraSpaces[i];
     }
-    this.strToRepair = strTempForSpace
+    this.strToRepair = strForDotComa
     return this.strToRepair;
   }
 
