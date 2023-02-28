@@ -44,16 +44,34 @@ class Repair_string {
       }
       strForDeletedSpaces += strForExtraSpaces[i];
     }
-    this.strToRepair = strForDeletedSpaces
+    this.strToRepair = strForDeletedSpaces.slice(0,-1)
     return this.strToRepair;
   }
 
+  wordCounterInString(){
+    let counterWords = 0;
+    let originalStrLength = this.strToRepair.length;
+    let spaces = ' ';
+
+    if (this.strToRepair.length != spaces) counterWords = 1;
+
+    for (let i = 0; i < originalStrLength; i++){
+      if (this.strToRepair[i] == spaces) counterWords += 1;
+      }
+    // console.log(this.strToRepair[originalStrLength-1])
+    return counterWords;
+    }
+
+    
+    
 }
 
 // console.log(stringRepair.spaceExtractor());
 let strNew = new Repair_string(NAMEOFSOMETHING);
 // console.log(strNew.strToRepair)
 console.log(strNew.titleString())
+console.log(strNew.wordCounterInString())
 strNew = new Repair_string(STR)
 // console.log(strNew.dotComaFrame())
 console.log(strNew.spaceTrimmer())
+console.log(strNew.wordCounterInString())
