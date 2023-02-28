@@ -32,7 +32,7 @@ class Repair_string {
       strForExtraSpaces += this.strToRepair[i];
     }
 
-    let strForDotComa = '';
+    let strForDeletedSpaces = '';
     let SpacedStrLength = strForExtraSpaces.length
 
     for (let i = 0; i < SpacedStrLength ; i++){
@@ -42,9 +42,9 @@ class Repair_string {
           strForExtraSpaces[i+1] == spaces)) {
           continue;
       }
-      strForDotComa += strForExtraSpaces[i];
+      strForDeletedSpaces += strForExtraSpaces[i];
     }
-    this.strToRepair = strForDotComa
+    this.strToRepair = strForDeletedSpaces
     return this.strToRepair;
   }
 
