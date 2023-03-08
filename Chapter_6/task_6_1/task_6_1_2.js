@@ -1,18 +1,7 @@
 'use strict';
 
-let schedule = {};
-
-alert( isEmpty(schedule) ); // true
-
-schedule["8:30"] = "get up";
-
-alert( isEmpty(schedule) ); // false
-
-function isEmpty(obj) {
-  for (let key in obj) {
-    if (obj[key]){
-      return false;
-    }
-  }
-  return true;
+function factorial(n) {
+  return (n != 1) ? n * factorial(n - 1) : 1;
 }
+
+alert( 'factorial(5) is: ' + factorial(5) ); // 120
