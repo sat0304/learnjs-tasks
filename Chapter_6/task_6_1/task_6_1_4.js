@@ -1,14 +1,39 @@
 'use strict';
 
-let salaries = {
-  John: 100,
-  Ann: 160,
-  Pete: 130
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
 };
 
-let sum = 0;
-for (let key in salaries) {
-  sum += salaries[key];
+function printList(list) {
+  let tmp = list;
+
+  while (tmp) {
+    alert(tmp.value);
+    tmp = tmp.next;
+  }
+
 }
 
-alert(sum); // 390
+printList(list);
+
+function printListRecurcion(list) {
+
+  alert(list.value); // выводим текущий элемент
+
+  if (list.next) {
+    printListRecurcion(list.next); // делаем то же самое для остальной части списка
+  }
+
+}
+
+printListRecurcion(list);
