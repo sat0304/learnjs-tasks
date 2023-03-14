@@ -1,4 +1,5 @@
 'use strict';
+// import fetch from "node-fetch";
 const fetch = require("node-fetch");
 
 // promise.then(f1).catch(f2);
@@ -9,7 +10,7 @@ function loadJson(url) {
 }
 
 function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/${name}`)
+  return fetch(`https://api.github.com/users/sat0304`)
     .then(response => response.json());
 }
 
@@ -28,10 +29,10 @@ function showAvatar(githubUser) {
 }
 
 // Используем их:
-loadJson("user.json")
+loadJson('./user.json')
   .then(user => loadGithubUser(user.name))
   .then(showAvatar)
-  .then(githubUser => console.log(`Показ аватара ${githubUser.name} завершён`));
+  .then(githubUser => alert(`Показ аватара ${githubUser.name} завершён`));
 
 
 
