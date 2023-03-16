@@ -143,3 +143,5 @@ package*
 node_*
 /node_*
 node_*/
+node_modules/
+/node_modules
