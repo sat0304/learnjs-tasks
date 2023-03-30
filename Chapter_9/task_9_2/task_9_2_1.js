@@ -1,15 +1,19 @@
 'use strict';
 
-function Rabbit() {}
-Rabbit.prototype = {
-  eats: true
-};
+class Animal {
 
-let rabbit = new Rabbit();
+  constructor(name) {
+    this.name = name;
+  }
 
-// Rabbit.prototype = {};
-// Rabbit.prototype.eats = false;
-// delete rabbit.eats;
-delete Rabbit.prototype.eats;
+}
 
-alert( rabbit.eats ); // true
+class Rabbit extends Animal {
+  constructor(name) {
+    super(name);
+    this.created = Date.now();
+  }
+}
+
+let rabbit = new Rabbit("Белый кролик"); // Error: this is not defined
+console.log(rabbit.name, rabbit.created);
