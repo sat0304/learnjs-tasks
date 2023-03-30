@@ -1,19 +1,40 @@
 'use strict';
 
-let animal = {
-  jumps: null
-};
-let rabbit = {
-  __proto__: animal,
-  jumps: true
-};
+class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
 
-alert( rabbit.jumps ); // true
+  render() {
+    let date = new Date();
 
-delete rabbit.jumps;
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
 
-alert( rabbit.jumps ); // null
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
 
-delete animal.jumps;
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
 
-alert( rabbit.jumps ); // undefined
+    let output = this.template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
+
+    alert(output);
+  }
+
+  // stop() {
+  //   clearInterval(this.timer);
+  // }
+
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 10000);
+  }
+}
+
+
+let clock = new Clock({template: 'h:m:s'});
+clock.start();
