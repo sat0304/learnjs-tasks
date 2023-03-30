@@ -16,4 +16,4 @@ class Rabbit extends Animal {
 }
 
 let rabbit = new Rabbit("Белый кролик"); // Error: this is not defined
-console.log(rabbit.name, rabbit.created);
+alert(rabbit.name, rabbit.created);

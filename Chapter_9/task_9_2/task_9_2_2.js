@@ -1,25 +1,40 @@
 'use strict';
 
-function Rabbit(name) {
-  this.name = name;
-};
+class Clock {
+  constructor({ template }) {
+    this.template = template;
+  }
 
-Rabbit.prototype = {};
+  render() {
+    let date = new Date();
 
-let rabbit = new Rabbit('Crazy hare');
-let rabbit2 = new rabbit.constructor('Bugs Bunny');
+    let hours = date.getHours();
+    if (hours < 10) hours = '0' + hours;
 
-alert( rabbit.name );
-alert( rabbit2.name ); // undefined
+    let mins = date.getMinutes();
+    if (mins < 10) mins = '0' + mins;
 
+    let secs = date.getSeconds();
+    if (secs < 10) secs = '0' + secs;
 
+    let output = this.template
+      .replace('h', hours)
+      .replace('m', mins)
+      .replace('s', secs);
 
-function User(name) {
-  this.name = name;
-};
+    alert(output);
+  }
 
-let user = new User('John');
-let user2 = new user.constructor('Pete');
+  stop() {
+    clearInterval(() => this.timer, 5000);
+  }
 
-alert( user.name );
-alert( user2.name );
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), 10000);
+  }
+}
+
+let clock = new Clock({template: 'h:m:s'});
+clock.start();
+clock.stop();
