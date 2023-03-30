@@ -1,40 +1,63 @@
 'use strict';
 
 class Clock {
-  constructor({ template }) {
-    this.template = template;
-  }
 
-  render() {
-    let date = new Date();
+	constructor( { template } ) {
+		this.template = template;
+	}
 
-    let hours = date.getHours();
-    if (hours < 10) hours = '0' + hours;
+	render() {
 
-    let mins = date.getMinutes();
-    if (mins < 10) mins = '0' + mins;
+		let date = new Date();
 
-    let secs = date.getSeconds();
-    if (secs < 10) secs = '0' + secs;
+		let hours = date.getHours();
+		if ( hours < 10 ) hours = '0' + hours;
 
-    let output = this.template
-      .replace('h', hours)
-      .replace('m', mins)
-      .replace('s', secs);
+		let mins = date.getMinutes();
+		if ( mins < 10 ) mins = '0' + mins;
 
-    alert(output);
-  }
+		let secs = date.getSeconds();
+		if ( secs < 10 ) secs = '0' + secs;
 
-  stop() {
-    clearInterval(() => this.timer, 5000);
-  }
+		let output = this.template
+					.replace('h', hours)
+					.replace('m', mins)
+					.replace('s', secs);
 
-  start() {
-    this.render();
-    this.timer = setInterval(() => this.render(), 10000);
-  }
+		alert(output);
+	}
+
+	start() {
+		this.render();
+		this.timer = setInterval( () => this.render(), 1000 );
+	}
+
+	stop() {
+		clearInterval(this.timer);
+	}
+ 
 }
 
-let clock = new Clock({template: 'h:m:s'});
-clock.start();
-clock.stop();
+class ExtendedClock extends Clock {
+
+	constructor( clockSettings ) {
+		super(clockSettings);
+
+		let { precision = 1000 } = clockSettings;
+
+		this.precision = precision;
+	}
+
+	start() {
+		this.render();
+		this.timer = setInterval( () => this.render(), this.precision );
+	}
+
+}
+
+let lowResolutionClock = new ExtendedClock( {
+	template: 'h:m:s',
+	precision: 2000
+} );
+
+lowResolutionClock.start();
