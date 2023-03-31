@@ -1,9 +1,5 @@
 'use strict';
 
-let promise = new Promise(function(resolve, reject) {
-  resolve(1);
+let expr = prompt("Введите арифметическое выражение:", '2*3+2');
 
-  setTimeout(() => resolve(2), 1000);
-});
-
-promise.then(alert);
+alert( eval(expr) );

@@ -1,38 +1,35 @@
 'use strict';
-// import fetch from "node-fetch";
-const fetch = require("node-fetch");
 
-// promise.then(f1).catch(f2);
-// promise.then(f1, f2);
-function loadJson(url) {
-  return fetch(url)
-    .then(response => response.json());
-}
+let handlers = Symbol('handlers');
 
-function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/sat0304`)
-    .then(response => response.json());
-}
+function makeObservable(target) {
+  // 1. Создадим хранилище обработчиков
+  target[handlers] = [];
 
-function showAvatar(githubUser) {
-  return new Promise(function(resolve, reject) {
-    let img = document.createElement('img');
-    img.src = githubUser.avatar_url;
-    img.className = "promise-avatar-example";
-    document.body.append(img);
+  // положим туда функции-обработчики для вызовов в будущем
+  target.observe = function(handler) {
+    this[handlers].push(handler);
+  };
 
-    setTimeout(() => {
-      img.remove();
-      resolve(githubUser);
-    }, 3000);
+  // 2. Создадим прокси для реакции на изменения
+  return new Proxy(target, {
+    set(target, property, value, receiver) {
+      let success = Reflect.set(...arguments); // перенаправим операцию к оригинальному объекту
+      if (success) { // если не произошло ошибки при записи свойства
+        // вызовем обработчики
+        target[handlers].forEach(handler => handler(property, value));
+      }
+      return success;
+    }
   });
 }
 
-// Используем их:
-loadJson('./user.json')
-  .then(user => loadGithubUser(user.name))
-  .then(showAvatar)
-  .then(githubUser => alert(`Показ аватара ${githubUser.name} завершён`));
+let user = {};
 
+user = makeObservable(user);
 
+user.observe((key, value) => {
+  alert(`SET ${key}=${value}`);
+});
 
+user.name = "John";
